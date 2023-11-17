@@ -1,17 +1,12 @@
 import csv
 import math
-import copy
 import matplotlib as mpl
 import pandas as pd
-from matplotlib.collections import LineCollection
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-import matplotlib.pyplot as plt
+import pyvista as pv
 
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import matplotlib.colors as mcolors
+
 
 def get_target_pos(ball_radius, ori_x, ori_y, ori_z):
     ans_x = []
@@ -50,7 +45,9 @@ def color_map(data, cmap, threshold):
         if data[dataIndex] < dmin:
             data[dataIndex] = dmin
     data = np.uint8(255 * (1 - (data - dmin) / (dmax - dmin)))
-
+    print("-----")
+    print(data)
+    print("-----")
     return cs[data]
 
 
@@ -87,6 +84,7 @@ expIndex = [[12, 9, -1, 15, 7, 5, 9, 12, 4], [15, 9, 1, 3, 3, 15, 12, 12, 12], [
 centerX = [-0.05, -0.03, -0.1, -0.09, -0.05, 0, -0.1, -0.05, -0.05]
 centerY = [1.2, 1.18, 1.5, 1.179, 1.18, 1.15, 1.2, 1.1, 1.16]
 centerZ = [0.57, 0.63, 0.6, 0.55, 0.55, 0.35, 0.5, 0.42, 0.4]
+# centerY = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 x = []
 y = []
 z = []
@@ -148,8 +146,8 @@ for j in range(3):
         oriZ = tempLoc[-1][4]
         # print(startIndex + q * 15 + expIndex[0][q + j * 3] - 1)
         # 19名被试，从1开始编号
-        for k in range(1, 2):
-            df = pd.read_csv("data2old\\" + str(k) + "\\" + expKind + "\\" + "trajectory.csv", encoding="utf-8")
+        for k in range(1, 20):
+            df = pd.read_csv("data\\" + str(k) + "\\" + expKind + "\\" + "trajectory.csv", encoding="utf-8")
             data = df.groupby('Case')
             startIndex = 0
             # 找到开始序号
@@ -242,7 +240,7 @@ for j in range(3):
         # 获取坐标轴的宽度（x 轴的范围）
         x_axis_width = plt.gca().get_xlim()[1] - plt.gca().get_xlim()[0]
         # 绘制16个目标球
-        # ax.scatter(targetPosX, targetPosY, targetPosZ, s=ballSize, color='#0F38F5')
+        ax.scatter(targetPosX, targetPosY, targetPosZ, s=ballSize, color='#0F38F5')
         # 画坐标轴
         # ax.plot([-0.7, 0.5], [1.8, 1.8], [0.6, 0.6], color='black')
         # ax.plot([-0.7, -0.7], [0.6, 1.8], [0.6, 0.6], color='black')
@@ -266,7 +264,7 @@ for j in range(3):
         plt.grid(False)
 
         # 调整视角
-        ax.view_init(elev=-45, azim=-90, roll=90)
+        ax.view_init(elev=90, azim=0, roll=0)
         # ax.view_init(elev=90, azim=0, roll=0)
         # 调整坐标轴
         # my_x_ticks = np.arange(-0.7, 0.5, 0.1)
@@ -278,6 +276,10 @@ for j in range(3):
         # dz = 1.2
         # ax.set_box_aspect([dx, dy, dz])
         # plt.axis("equal")
+
+        ax.set_xlim3d(xmin=-1, xmax=1)
+        ax.set_ylim3d(ymin=0, ymax=2)
+        ax.set_zlim3d(zmin=0, zmax=2)
         # 关闭坐标轴
         plt.axis('off')
 
@@ -294,7 +296,7 @@ for j in range(3):
         # )
 
         #  image 为四通道图像（RGBA）
-        fig.savefig(str(expRounds), transparent=True, dpi=1000, bbox_inches='tight', pad_inches=0.0)
+        # fig.savefig(str(expRounds), transparent=True, dpi=1000, bbox_inches='tight', pad_inches=0.0)
 
         # plt.show()
         # 清空缓存
@@ -316,3 +318,28 @@ for j in range(3):
             csv_writer.writerow("q")
             # 5. 关闭文件
             f.close()
+
+
+
+        '''测试mayavi中的plot3d，points3d函数
+        :return: None
+        '''
+        points = []
+        for qq in range(len(x)):
+            points.append([x[qq], y[qq], z[qq]])
+        mesh = pv.PolyData(points)  # PolyData对象的实例化
+        # mesh.plot(point_size=2, style='points')
+        p = pv.Plotter()
+        sphere = pv.Sphere()
+        p.add_mesh(sphere, color='lightblue')
+        cmap = 'bwr'
+        v_max = max(v)
+        v_min = min(v)
+        v_new = []
+        for temp_v in v:
+            v_new.append((v_max - temp_v) / (v_max - v_min))
+        p.add_mesh(mesh, scalars=v_new, cmap=cmap)
+        p.dimensions = [1, 1, 1]
+        p.show_grid()
+        p.show()
+
