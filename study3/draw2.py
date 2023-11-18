@@ -54,6 +54,8 @@ def color_map(data, cmap, threshold):
 # 将坐标轴宽度转换为 s 参数的单位
 def axis_to_s(axis_width, scale_factor):
     return (axis_width * scale_factor) ** 2
+
+
 # x = np.linspace(0, 2*np.pi, 200)
 # y = np.sin(x)
 # ps = np.stack((x,y), axis=1)
@@ -84,7 +86,35 @@ expIndex = [[12, 9, -1, 15, 7, 5, 9, 12, 4], [15, 9, 1, 3, 3, 15, 12, 12, 12], [
 centerX = [-0.05, -0.03, -0.1, -0.09, -0.05, 0, -0.1, -0.05, -0.05]
 centerY = [1.2, 1.18, 1.5, 1.179, 1.18, 1.15, 1.2, 1.1, 1.16]
 centerZ = [0.57, 0.63, 0.6, 0.55, 0.55, 0.35, 0.5, 0.42, 0.4]
-# centerY = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+# 行号代表实验轮次 列号代表玩家序号
+moveX2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+moveY2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+moveZ2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
 x = []
 y = []
 z = []
@@ -97,6 +127,7 @@ expKind = ""
 zeroExist = True
 ballSize = 0
 expRounds = 0
+radius = 0
 # 三种选择技术
 for j in range(3):
     if j == 0:
@@ -114,13 +145,19 @@ for j in range(3):
         targetPosZ.clear()
         if q == 0:
             ballSize = 80 * math.pi
-            targetPosX, targetPosY, targetPosZ = get_target_pos(0.35, centerX[expRounds], centerY[expRounds], centerZ[expRounds])
+            radius = 0.015
+            targetPosX, targetPosY, targetPosZ = get_target_pos(0.35, centerX[expRounds], centerY[expRounds],
+                                                                centerZ[expRounds])
         elif q == 1:
+            radius = 0.03
             ballSize = 100 * math.pi * 4
-            targetPosX, targetPosY, targetPosZ = get_target_pos(0.3, centerX[expRounds], centerY[expRounds], centerZ[expRounds])
+            targetPosX, targetPosY, targetPosZ = get_target_pos(0.3, centerX[expRounds], centerY[expRounds],
+                                                                centerZ[expRounds])
         elif q == 2:
             ballSize = 100 * math.pi * 9
-            targetPosX, targetPosY, targetPosZ = get_target_pos(0.25, centerX[expRounds], centerY[expRounds], centerZ[expRounds])
+            radius = 0.045
+            targetPosX, targetPosY, targetPosZ = get_target_pos(0.25, centerX[expRounds], centerY[expRounds],
+                                                                centerZ[expRounds])
         data2 = []
         x.clear()
         y.clear()
@@ -173,6 +210,7 @@ for j in range(3):
                 moveX = data1[-1][2] - oriX
                 moveY = data1[-1][3] - oriY
                 moveZ = data1[-1][4] - oriZ
+
             # print("---------")
             # print(startIndex + q * 15 + expIndex[k - 1][q + j * 3] - 1)
             df = pd.read_csv("data\\" + str(k) + "\\" + expKind + "\\" + "trajectory.csv", encoding="utf-8")
@@ -200,11 +238,14 @@ for j in range(3):
                     temp[2] -= moveX
                     temp[3] -= moveY
                     temp[4] -= moveZ
+                    temp[2] -= moveX2[q + j * 3][k - 1]
+                    temp[3] -= moveY2[q + j * 3][k - 1]
+                    temp[4] -= moveZ2[q + j * 3][k - 1]
                     data2.append(temp)
                 for locIndex in range(len(data1) - 1):
                     tempDistance = math.sqrt((data1[locIndex + 1][2] - data1[locIndex][2]) ** 2 + (
-                                data1[locIndex + 1][3] - data1[locIndex][3]) ** 2 + (
-                                                         data1[locIndex + 1][4] - data1[locIndex][4]) ** 2)
+                            data1[locIndex + 1][3] - data1[locIndex][3]) ** 2 + (
+                                                     data1[locIndex + 1][4] - data1[locIndex][4]) ** 2)
                     # print(tempDistance)
                     distance.append(tempDistance)
             toJump = False
@@ -226,7 +267,6 @@ for j in range(3):
 
                 else:
                     toJump = True
-
 
         print(expKind, q + 1, "距离为", np.sum(distance))
         print("z轴离散值", np.std(z))
@@ -319,8 +359,6 @@ for j in range(3):
             # 5. 关闭文件
             f.close()
 
-
-
         '''测试mayavi中的plot3d，points3d函数
         :return: None
         '''
@@ -330,8 +368,9 @@ for j in range(3):
         mesh = pv.PolyData(points)  # PolyData对象的实例化
         # mesh.plot(point_size=2, style='points')
         p = pv.Plotter()
-        sphere = pv.Sphere()
-        p.add_mesh(sphere, color='lightblue')
+        for q1 in range(len(targetPosX)):
+            sphere = pv.Sphere(radius=radius, center=(targetPosX[q1], targetPosY[q1], targetPosZ[q1]))
+            p.add_mesh(sphere, color='lightblue')
         cmap = 'bwr'
         v_max = max(v)
         v_min = min(v)
@@ -342,4 +381,3 @@ for j in range(3):
         p.dimensions = [1, 1, 1]
         p.show_grid()
         p.show()
-
