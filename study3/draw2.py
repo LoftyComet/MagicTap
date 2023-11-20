@@ -8,6 +8,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+def export_to_pts(points, filename):
+    with open(filename, 'w') as file:
+        for point in points:
+            line = f"{point[0]} {point[1]} {point[2]}\n"
+            file.write(line)
+
 def get_target_pos(ball_radius, ori_x, ori_y, ori_z):
     ans_x = []
     ans_y = []
@@ -86,13 +92,16 @@ expIndex = [[12, 9, -1, 15, 7, 5, 9, 12, 4], [15, 9, 1, 3, 3, 15, 12, 12, 12], [
 centerX = [-0.05, -0.03, -0.1, -0.09, -0.05, 0, -0.1, -0.05, -0.05]
 centerY = [1.2, 1.18, 1.5, 1.179, 1.18, 1.15, 1.2, 1.1, 1.16]
 centerZ = [0.57, 0.63, 0.6, 0.55, 0.55, 0.35, 0.5, 0.42, 0.4]
+# 开始结束序号(左闭右开)
+begin = 1
+end = 3
 # 行号代表实验轮次 列号代表玩家序号 X Y Z代表三维坐标
 # 偏差是在原来基础上加上矩阵内对应的数组
-moveX2 = [[11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+moveX2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [0.043, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -101,7 +110,7 @@ moveY2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         [-0.018, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -184,7 +193,7 @@ for j in range(3):
         oriZ = tempLoc[-1][4]
         # print(startIndex + q * 15 + expIndex[0][q + j * 3] - 1)
         # 19名被试，从1开始编号
-        for k in range(1, 20):
+        for k in range(begin, end):
             df = pd.read_csv("data\\" + str(k) + "\\" + expKind + "\\" + "trajectory.csv", encoding="utf-8")
             data = df.groupby('Case')
             startIndex = 0
@@ -268,6 +277,11 @@ for j in range(3):
 
                 else:
                     toJump = True
+            points = []
+            for qq in range(len(x)):
+                points.append([x[qq], y[qq], z[qq]])
+            # 导出到 .pts 文件
+            export_to_pts(points, "output" + str(q + j * 3) + "-" + str(k - 1) + ".pts")
 
         print(expKind, q + 1, "距离为", np.sum(distance))
         print("z轴离散值", np.std(z))
@@ -345,20 +359,24 @@ for j in range(3):
 
         expRounds += 1
 
-        with open("ori_data" + str(expRounds) + ".csv", "a", encoding="utf-8", newline="") as f:
-            # 2. 基于文件对象构建 csv写入对象
-            csv_writer = csv.writer(f)
-            temp = []
-            for i in range(len(x)):
-                temp.append(i)
-                temp.append(x[i])
-                temp.append(y[i])
-                temp.append(z[i])
-                csv_writer.writerow(temp)
-                temp.clear()
-            csv_writer.writerow("q")
-            # 5. 关闭文件
-            f.close()
+        # with open("ori_data" + str(expRounds) + ".csv", "a", encoding="utf-8", newline="") as f:
+        #     # 2. 基于文件对象构建 csv写入对象
+        #     csv_writer = csv.writer(f)
+        #     temp = []
+        #     for i in range(len(x)):
+        #         temp.append(i)
+        #         temp.append(x[i])
+        #         temp.append(y[i])
+        #         temp.append(z[i])
+        #         csv_writer.writerow(temp)
+        #         temp.clear()
+        #     csv_writer.writerow("q")
+        #     # 5. 关闭文件
+        #     f.close()
+
+
+
+
 
         '''测试mayavi中的plot3d，points3d函数
         :return: None
@@ -366,12 +384,15 @@ for j in range(3):
         points = []
         for qq in range(len(x)):
             points.append([x[qq], y[qq], z[qq]])
+
+
+
         mesh = pv.PolyData(points)  # PolyData对象的实例化
         # mesh.plot(point_size=2, style='points')
         p = pv.Plotter()
         for q1 in range(len(targetPosX)):
             sphere = pv.Sphere(radius=radius, center=(targetPosX[q1], targetPosY[q1], targetPosZ[q1]))
-            p.add_mesh(sphere, color='lightblue')
+            p.add_mesh(sphere, color='lightblue', opacity=0.5)
         cmap = 'bwr'
         v_max = max(v)
         v_min = min(v)
@@ -379,6 +400,5 @@ for j in range(3):
         for temp_v in v:
             v_new.append((v_max - temp_v) / (v_max - v_min))
         p.add_mesh(mesh, scalars=v_new, cmap=cmap)
-        p.dimensions = [1, 1, 1]
         p.show_grid()
-        p.show()
+        p.show(cpos="xy")
