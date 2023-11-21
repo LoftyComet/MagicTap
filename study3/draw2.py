@@ -94,7 +94,7 @@ centerY = [1.2, 1.18, 1.5, 1.179, 1.18, 1.15, 1.2, 1.1, 1.16]
 centerZ = [0.57, 0.63, 0.6, 0.55, 0.55, 0.35, 0.5, 0.42, 0.4]
 # 开始结束序号(左闭右开)
 begin = 1
-end = 3
+end = 20
 # 行号代表实验轮次 列号代表玩家序号 X Y Z代表三维坐标
 # 偏差是在原来基础上加上矩阵内对应的数组
 moveX2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -148,8 +148,8 @@ for j in range(3):
         expKind = "magic"
     # 3种DD值
     for q in range(3):
-        distance.clear()
 
+        distance.clear()
         targetPosX.clear()
         targetPosY.clear()
         targetPosZ.clear()
@@ -158,16 +158,19 @@ for j in range(3):
             radius = 0.015
             targetPosX, targetPosY, targetPosZ = get_target_pos(0.35, centerX[expRounds], centerY[expRounds],
                                                                 centerZ[expRounds])
+            DD = "H"
         elif q == 1:
             radius = 0.03
             ballSize = 100 * math.pi * 4
             targetPosX, targetPosY, targetPosZ = get_target_pos(0.3, centerX[expRounds], centerY[expRounds],
                                                                 centerZ[expRounds])
+            DD = "M"
         elif q == 2:
             ballSize = 100 * math.pi * 9
             radius = 0.045
             targetPosX, targetPosY, targetPosZ = get_target_pos(0.25, centerX[expRounds], centerY[expRounds],
                                                                 centerZ[expRounds])
+            DD = "L"
         data2 = []
         x.clear()
         y.clear()
@@ -281,7 +284,7 @@ for j in range(3):
             for qq in range(len(x)):
                 points.append([x[qq], y[qq], z[qq]])
             # 导出到 .pts 文件
-            export_to_pts(points, "output" + str(q + j * 3) + "-" + str(k - 1) + ".pts")
+            export_to_pts(points, "output" + str(k - 1) + "-" + expKind + "-" + DD + ".pts")
 
         print(expKind, q + 1, "距离为", np.sum(distance))
         print("z轴离散值", np.std(z))
@@ -401,4 +404,4 @@ for j in range(3):
             v_new.append((v_max - temp_v) / (v_max - v_min))
         p.add_mesh(mesh, scalars=v_new, cmap=cmap)
         p.show_grid()
-        p.show(cpos="xy")
+        # p.show(cpos="xy")
