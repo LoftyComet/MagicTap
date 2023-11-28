@@ -104,7 +104,7 @@ moveX2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0.043, 0.03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0.01, 0.07, 0.07, 0.04, 0.01, 0.16, 0.01, 0, 0.11, 0.06, -0.01, 0.1, 0.01, 0.05, 0.07, 0.05, 0, 0.05, 0.01],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 moveY2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -113,7 +113,7 @@ moveY2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [-0.018, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0, -0.01, -0.01, 0, 0, 0.02, 0.02, 0.02, 0, -0.02, 0.01, 0, 0.01, 0.01, 0.01, 0.01, 0.03, 0.03, -0.05],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 moveZ2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -122,13 +122,9 @@ moveZ2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-          [0.03, 0.05, 0.05, 0.01, 0.08, 0.08, -0.03, 0.04, 0, 0.01, 0.06, 0.01, 0.08, 0.06, 0.03, 0.05, -0.05, 0.04,
-           0.01],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-
-# 旋转矩阵()
-rotationMatrix = []
 
 x = []
 y = []
@@ -152,7 +148,6 @@ for j in range(3):
     elif j == 2:
         expKind = "magic"
     # 3种DD值
-    DD = ""
     for q in range(3):
 
         distance.clear()
@@ -164,7 +159,6 @@ for j in range(3):
             radius = 0.015
             targetPosX, targetPosY, targetPosZ = get_target_pos(0.35, centerX[expRounds], centerY[expRounds],
                                                                 centerZ[expRounds])
-
             DD = "H"
         elif q == 1:
             radius = 0.03
@@ -178,13 +172,6 @@ for j in range(3):
             targetPosX, targetPosY, targetPosZ = get_target_pos(0.25, centerX[expRounds], centerY[expRounds],
                                                                 centerZ[expRounds])
             DD = "L"
-
-        # 导出坐标球pts位置
-        # targetPoint = []
-        # for op in range(len(targetPosX)):
-        #     targetPoint.append([targetPosX[op], targetPosY[op], targetPosZ[op]])
-        #     export_to_pts(targetPoint, "targetPoint" + str(j) + "-" + DD + ".pts")
-
         data2 = []
         x.clear()
         y.clear()
@@ -242,14 +229,10 @@ for j in range(3):
             # print(startIndex + q * 15 + expIndex[k - 1][q + j * 3] - 1)
             df = pd.read_csv("data\\" + str(k) + "\\" + expKind + "\\" + "trajectory.csv", encoding="utf-8")
             data = df.groupby('Case')
-            points = []
-
             # 15个目标球
             for i in range(startIndex + q * 15, startIndex + (q + 1) * 15):
-                # for i in range(1, 4):
                 try:
                     # 每一个人每轮数据
-                    # !!!
                     data1 = np.array(data.get_group(i).reset_index()).tolist()
                     # print(data1)
                 except KeyError:
@@ -272,7 +255,6 @@ for j in range(3):
                     temp[2] += moveX2[q + j * 3][k - 1]
                     temp[3] += moveY2[q + j * 3][k - 1]
                     temp[4] += moveZ2[q + j * 3][k - 1]
-                    points.append([temp[2], temp[3], temp[4]])
                     data2.append(temp)
                 for locIndex in range(len(data1) - 1):
                     tempDistance = math.sqrt((data1[locIndex + 1][2] - data1[locIndex][2]) ** 2 + (
@@ -280,11 +262,6 @@ for j in range(3):
                                                      data1[locIndex + 1][4] - data1[locIndex][4]) ** 2)
                     # print(tempDistance)
                     distance.append(tempDistance)
-
-            # 导出到 .pts 文件
-
-            # export_to_pts(points, "output" + str(k) + "-" + expKind + "-" + DD + ".pts")
-
             toJump = False
             jumpTimes = 0
             for temp in data2:
@@ -302,9 +279,13 @@ for j in range(3):
                             z.append(temp[4])
                             v.append(temp[6])
 
-
                 else:
                     toJump = True
+            points = []
+            for qq in range(len(x)):
+                points.append([x[qq], y[qq], z[qq]])
+            # 导出到 .pts 文件
+            # export_to_pts(points, "output" + str(k - 1) + "-" + expKind + "-" + DD + ".pts")
 
         print(expKind, q + 1, "距离为", np.sum(distance))
         print("z轴离散值", np.std(z))
@@ -416,6 +397,6 @@ for j in range(3):
         v_new = []
         for temp_v in v:
             v_new.append((v_max - temp_v) / (v_max - v_min))
-        p.add_mesh(mesh, scalars=v_new, cmap=cmap, point_size=3)
+        p.add_mesh(mesh, scalars=v_new, cmap=cmap)
         p.show_grid()
         p.show(cpos="xy")
