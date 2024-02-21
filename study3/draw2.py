@@ -7,7 +7,6 @@ import pyvista as pv
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def export_to_pts(points, filename):
     with open(filename, 'w') as file:
         for point in points:

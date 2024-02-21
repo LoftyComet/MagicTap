@@ -266,7 +266,8 @@ for j in range(4):
             # dx
             # print(get_distance(line_end, line_start) - get_distance(projection, line_start))
             # print(get_distance(line_end, line_start))
-            ws.write(k, 0, get_distance(line_end, line_start))
+            ws.write(k, 0, get_distance(line_end, line_start) - get_distance(projection, line_start))
+            # ws.write(k, 0, get_distance(line_end, line_start))
             rotation_direction = rotation_directions[k - 1]
             temp = first_end_index[k - 1]
             # 剩余14次点击
@@ -283,9 +284,10 @@ for j in range(4):
                 # dx
 
                 # print(get_distance(line_end, line_start) - get_distance(projection, line_start))
-                ws.write(k, i, get_distance(line_end, line_start))
+                # ws.write(k, i, get_distance(line_end, line_start))
+                ws.write(k, i, get_distance(line_end, line_start) - get_distance(projection, line_start))
                 # print(get_distance(line_end, line_start))
-            # wb.save(expKind + DD + '.xls')
+            wb.save(expKind + DD + '.xls')
             # print("over")
             # print(np.std(z_dis))
             # print(distance_case)
